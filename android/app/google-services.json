@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "794500613567",
+    "firebase_url": "https://flutter-movie-tickets.firebaseio.com",
+    "project_id": "flutter-movie-tickets",
+    "storage_bucket": "flutter-movie-tickets.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794500613567:android:0f5b60a0b89d95074d4d0a",
+        "android_client_info": {
+          "package_name": "com.example.flutter_movie_tickets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "794500613567-fm3c460m9pemna3v9jssiv5678f8vtug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHV7Vm-m-v4DrrsHFdDqImerIk2mFZqwU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "794500613567-fm3c460m9pemna3v9jssiv5678f8vtug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
