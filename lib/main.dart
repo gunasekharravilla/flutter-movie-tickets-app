@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_movie_tickets/bloc/page_bloc.dart';
+import 'package:flutter_movie_tickets/bloc/theme_bloc.dart';
 import 'package:flutter_movie_tickets/bloc/user_bloc.dart';
 import 'package:flutter_movie_tickets/services/services.dart';
 import 'package:provider/provider.dart';
@@ -19,9 +20,14 @@ class MyApp extends StatelessWidget {
         child: MultiBlocProvider(
             providers: [
               BlocProvider(create: (_) => PageBloc()),
-              BlocProvider(create: (_) => UserBloc())
+              BlocProvider(create: (_) => UserBloc()),
+              BlocProvider(create: (_) => ThemeBloc())
             ],
-            child: MaterialApp(
-                debugShowCheckedModeBanner: false, home: Wrapper())));
+            child: BlocBuilder<ThemeBloc, ThemeState>(
+              builder: (_, themeState) => MaterialApp(
+                  theme: themeState.themeData,
+                  debugShowCheckedModeBanner: false,
+                  home: Wrapper()),
+            )));
   }
 }

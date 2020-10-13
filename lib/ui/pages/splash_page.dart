@@ -39,6 +39,9 @@ class SplashPage extends StatelessWidget {
                     "Get Started",
                     style: whiteTextFont.copyWith(fontSize: 16),
                   ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   color: mainColor,
                   onPressed: () {},
                 ),
