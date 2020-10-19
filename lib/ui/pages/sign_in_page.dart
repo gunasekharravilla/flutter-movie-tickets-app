@@ -18,6 +18,7 @@ class _SignInPageState extends State<SignInPage> {
     context
         .bloc<ThemeBloc>()
         .add(ChangeTheme(ThemeData().copyWith(primaryColor: accentColor2)));
+
     return WillPopScope(
       onWillPop: () {
         context.bloc<PageBloc>().add(GoToSplashPage());
@@ -44,7 +45,7 @@ class _SignInPageState extends State<SignInPage> {
                   Container(
                     margin: EdgeInsets.only(top: 70, bottom: 40),
                     child: Text(
-                      "Wellcome Back,\nExplorer!",
+                      "Welcome Back,\nExplorer!",
                       style: blackTextFont.copyWith(fontSize: 20),
                     ),
                   ),
@@ -60,7 +61,7 @@ class _SignInPageState extends State<SignInPage> {
                           borderRadius: BorderRadius.circular(6),
                         ),
                         labelText: "Email Address",
-                        hintText: "Email Adress"),
+                        hintText: "Email Address"),
                   ),
                   SizedBox(
                     height: 16,
@@ -86,7 +87,7 @@ class _SignInPageState extends State<SignInPage> {
                   Row(
                     children: <Widget>[
                       Text(
-                        "Forgot password? ",
+                        "Forgot Password? ",
                         style: greyTextFont.copyWith(
                             fontSize: 12, fontWeight: FontWeight.w400),
                       ),
@@ -106,6 +107,7 @@ class _SignInPageState extends State<SignInPage> {
                               color: mainColor,
                             )
                           : FloatingActionButton(
+                              elevation: 0,
                               child: Icon(
                                 Icons.arrow_forward,
                                 color: isEmailValid && isPasswordValid
@@ -132,7 +134,7 @@ class _SignInPageState extends State<SignInPage> {
                                         });
 
                                         Flushbar(
-                                          duration: Duration(seconds: 3),
+                                          duration: Duration(seconds: 4),
                                           flushbarPosition:
                                               FlushbarPosition.TOP,
                                           backgroundColor: Color(0xFFFF5C83),
@@ -140,8 +142,7 @@ class _SignInPageState extends State<SignInPage> {
                                         )..show(context);
                                       }
                                     }
-                                  : null,
-                            ),
+                                  : null),
                     ),
                   ),
                   Row(

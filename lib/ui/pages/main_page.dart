@@ -26,10 +26,9 @@ class _MainPageState extends State<MainPage> {
             color: accentColor1,
           ),
           SafeArea(
-            child: Container(
-              color: Color(0xFFF6F7F9),
-            ),
-          ),
+              child: Container(
+            color: Color(0xFFF6F7F9),
+          )),
           PageView(
             controller: pageController,
             onPageChanged: (index) {
@@ -44,7 +43,7 @@ class _MainPageState extends State<MainPage> {
               )
             ],
           ),
-          createCustomBottomNavbar(),
+          createCustomBottomNavBar(),
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
@@ -52,21 +51,20 @@ class _MainPageState extends State<MainPage> {
               width: 46,
               margin: EdgeInsets.only(bottom: 42),
               child: FloatingActionButton(
-                elevation: 0,
-                backgroundColor: accentColor2,
-                child: SizedBox(
-                  height: 26,
-                  width: 26,
-                  child: Icon(
-                    MdiIcons.walletPlus,
-                    color: Colors.black.withOpacity(0.54),
+                  elevation: 0,
+                  backgroundColor: accentColor2,
+                  child: SizedBox(
+                    height: 26,
+                    width: 26,
+                    child: Icon(
+                      MdiIcons.walletPlus,
+                      color: Colors.black.withOpacity(0.54),
+                    ),
                   ),
-                ),
-                onPressed: () {
-                  context.bloc<UserBloc>().add(SignOut());
-                  AuthServices.signOut();
-                },
-              ),
+                  onPressed: () {
+                    context.bloc<UserBloc>().add(SignOut());
+                    AuthServices.signOut();
+                  }),
             ),
           )
         ],
@@ -74,7 +72,7 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Widget createCustomBottomNavbar() => Align(
+  Widget createCustomBottomNavBar() => Align(
         alignment: Alignment.bottomCenter,
         child: ClipPath(
           clipper: BottomNavBarClipper(),
@@ -86,48 +84,41 @@ class _MainPageState extends State<MainPage> {
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20))),
             child: BottomNavigationBar(
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              selectedItemColor: mainColor,
-              unselectedItemColor: Color(0xFFE5E5E5),
-              currentIndex: bottomNavBarIndex,
-              onTap: (index) {
-                setState(() {
-                  bottomNavBarIndex = index;
-                  pageController.jumpToPage(index);
-                });
-              },
-              items: [
-                BottomNavigationBarItem(
-                    title: Text(
-                      "New Movies",
-                      style: GoogleFonts.raleway(
-                          fontSize: 11, fontWeight: FontWeight.w500),
-                    ),
-                    icon: Container(
-                      margin: EdgeInsets.only(bottom: 6),
-                      height: 18,
-                      width: 24,
-                      child: Image.asset((bottomNavBarIndex == 0)
-                          ? "assets/ic_movie.png"
-                          : "assets/ic_movie_gray.png"),
-                    )),
-                BottomNavigationBarItem(
-                    title: Text(
-                      "MyTickets",
-                      style: GoogleFonts.raleway(
-                          fontSize: 11, fontWeight: FontWeight.w500),
-                    ),
-                    icon: Container(
-                      margin: EdgeInsets.only(bottom: 6),
-                      height: 18,
-                      width: 24,
-                      child: Image.asset((bottomNavBarIndex == 1)
-                          ? "assets/ic_ticket.png"
-                          : "assets/ic_ticket_grey.png"),
-                    ))
-              ],
-            ),
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+                selectedItemColor: mainColor,
+                unselectedItemColor: Color(0xFFE5E5E5),
+                currentIndex: bottomNavBarIndex,
+                onTap: (index) {
+                  setState(() {
+                    bottomNavBarIndex = index;
+                    pageController.jumpToPage(index);
+                  });
+                },
+                items: [
+                  BottomNavigationBarItem(
+                      title: Text("New Movies",
+                          style: GoogleFonts.raleway(
+                              fontSize: 11, fontWeight: FontWeight.w500)),
+                      icon: Container(
+                        margin: EdgeInsets.only(bottom: 6),
+                        height: 18,
+                        child: Image.asset((bottomNavBarIndex == 0)
+                            ? "assets/ic_movie.png"
+                            : "assets/ic_movie_grey.png"),
+                      )),
+                  BottomNavigationBarItem(
+                      title: Text("My Tickets",
+                          style: GoogleFonts.raleway(
+                              fontSize: 11, fontWeight: FontWeight.w500)),
+                      icon: Container(
+                        margin: EdgeInsets.only(bottom: 6),
+                        height: 20,
+                        child: Image.asset((bottomNavBarIndex == 1)
+                            ? "assets/ic_tickets.png"
+                            : "assets/ic_tickets_grey.png"),
+                      ))
+                ]),
           ),
         ),
       );
@@ -138,9 +129,9 @@ class BottomNavBarClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     Path path = Path();
 
-    path.lineTo(size.width / 2 - 29, 0);
-    path.quadraticBezierTo(size.width / 2 - 29, 33.5, size.width / 2, 33.5);
-    path.quadraticBezierTo(size.width / 2 + 29, 33.5, size.width / 2 + 29, 0);
+    path.lineTo(size.width / 2 - 28, 0);
+    path.quadraticBezierTo(size.width / 2 - 28, 33, size.width / 2, 33);
+    path.quadraticBezierTo(size.width / 2 + 28, 33, size.width / 2 + 28, 0);
     path.lineTo(size.width, 0);
     path.lineTo(size.width, size.height);
     path.lineTo(0, size.height);

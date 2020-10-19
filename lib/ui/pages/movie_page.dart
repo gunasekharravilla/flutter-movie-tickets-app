@@ -15,6 +15,15 @@ class MoviePage extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(defaultMargin, 20, defaultMargin, 30),
           child: BlocBuilder<UserBloc, UserState>(builder: (_, userState) {
             if (userState is UserLoaded) {
+              if (imageFileToUpload != null) {
+                uploadImage(imageFileToUpload).then((downloadURL) {
+                  imageFileToUpload = null;
+                  context
+                      .bloc<UserBloc>()
+                      .add(UpdateData(profileImage: downloadURL));
+                });
+              }
+
               return Row(
                 children: <Widget>[
                   Container(
@@ -34,7 +43,7 @@ class MoviePage extends StatelessWidget {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                  image: (userState.user.profilePicture == null
+                                  image: (userState.user.profilePicture == ""
                                       ? AssetImage("assets/user_pic.png")
                                       : NetworkImage(
                                           userState.user.profilePicture)),
@@ -52,7 +61,6 @@ class MoviePage extends StatelessWidget {
                       SizedBox(
                         width: MediaQuery.of(context).size.width -
                             2 * defaultMargin -
-                            50 -
                             78,
                         child: Text(
                           userState.user.name,
@@ -62,13 +70,14 @@ class MoviePage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                          NumberFormat.currency(
-                                  locale: "id_ID",
-                                  decimalDigits: 0,
-                                  symbol: "IDR ")
-                              .format(userState.user.balance),
-                          style: yellowNumberFont.copyWith(
-                              fontSize: 14, fontWeight: FontWeight.w400))
+                        NumberFormat.currency(
+                                locale: "id_ID",
+                                decimalDigits: 0,
+                                symbol: "IDR ")
+                            .format(userState.user.balance),
+                        style: yellowNumberFont.copyWith(
+                            fontSize: 14, fontWeight: FontWeight.w400),
+                      )
                     ],
                   )
                 ],
@@ -80,7 +89,7 @@ class MoviePage extends StatelessWidget {
               );
             }
           }),
-        ),
+        )
       ],
     );
   }

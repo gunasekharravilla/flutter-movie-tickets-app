@@ -12,7 +12,8 @@ class SplashPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                height: 136,
+                height: 139,
+                width: 128,
                 decoration: BoxDecoration(
                     image:
                         DecorationImage(image: AssetImage("assets/logo.png"))),
@@ -25,7 +26,7 @@ class SplashPage extends StatelessWidget {
                 ),
               ),
               Text(
-                "Whach a new movie much\neasier than any before",
+                "Watch a new movie much\neasier than any before",
                 style: greyTextFont.copyWith(
                     fontSize: 16, fontWeight: FontWeight.w300),
                 textAlign: TextAlign.center,
@@ -35,20 +36,18 @@ class SplashPage extends StatelessWidget {
                 height: 46,
                 margin: EdgeInsets.only(top: 70, bottom: 19),
                 child: RaisedButton(
-                  child: Text(
-                    "Get Started",
-                    style: whiteTextFont.copyWith(fontSize: 16),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  color: mainColor,
-                  onPressed: () {
-                    context
-                        .bloc<PageBloc>()
-                        .add(GoToRegistrationPage(RegistrationData()));
-                  },
-                ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    child: Text(
+                      "Get Started",
+                      style: whiteTextFont.copyWith(fontSize: 16),
+                    ),
+                    color: mainColor,
+                    onPressed: () {
+                      context
+                          .bloc<PageBloc>()
+                          .add(GoToRegistrationPage(RegistrationData()));
+                    }),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -8,9 +8,9 @@ extension FirebaseUserExtension on FirebaseUser {
           int balance = 50000}) =>
       User(this.uid, this.email,
           name: name,
+          balance: balance,
           selectedGenres: selectedGenres,
-          selectedLanguage: selectedLanguage,
-          balance: balance);
+          selectedLanguage: selectedLanguage);
 
   Future<User> fromFireStore() async => await UserServices.getUser(this.uid);
 }

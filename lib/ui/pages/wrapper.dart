@@ -13,6 +13,7 @@ class Wrapper extends StatelessWidget {
     } else {
       if (!(prevPageEvent is GoToMainPage)) {
         context.bloc<UserBloc>().add(LoadUser(firebaseUser.uid));
+
         prevPageEvent = GoToMainPage();
         context.bloc<PageBloc>().add(prevPageEvent);
       }
@@ -25,6 +26,11 @@ class Wrapper extends StatelessWidget {
                 ? SignInPage()
                 : (pageState is OnRegistrationPage)
                     ? SignUpPage(pageState.registrationData)
-                    : MainPage());
+                    : (pageState is OnPreferencePage)
+                        ? PreferencePage(pageState.registrationData)
+                        : (pageState is OnAccountConfirmationPage)
+                            ? AccountConfirmationPage(
+                                pageState.registrationData)
+                            : MainPage());
   }
 }

@@ -1,11 +1,11 @@
 part of 'services.dart';
 
 class UserServices {
-  static CollectionReference _userColloection =
+  static CollectionReference _userCollection =
       Firestore.instance.collection('users');
 
   static Future<void> updateUser(User user) async {
-    _userColloection.document(user.id).setData({
+    _userCollection.document(user.id).setData({
       'email': user.email,
       'name': user.name,
       'balance': user.balance,
@@ -16,11 +16,11 @@ class UserServices {
   }
 
   static Future<User> getUser(String id) async {
-    DocumentSnapshot snapshot = await _userColloection.document(id).get();
+    DocumentSnapshot snapshot = await _userCollection.document(id).get();
 
     return User(id, snapshot.data['email'],
         balance: snapshot.data['balance'],
-        profilePicture: snapshot.data['profilPicture'],
+        profilePicture: snapshot.data['profilePicture'],
         selectedGenres: (snapshot.data['selectedGenres'] as List)
             .map((e) => e.toString())
             .toList(),

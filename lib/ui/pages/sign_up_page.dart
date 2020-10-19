@@ -4,6 +4,7 @@ class SignUpPage extends StatefulWidget {
   final RegistrationData registrationData;
 
   SignUpPage(this.registrationData);
+
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
@@ -27,9 +28,11 @@ class _SignUpPageState extends State<SignUpPage> {
     context
         .bloc<ThemeBloc>()
         .add(ChangeTheme(ThemeData().copyWith(primaryColor: accentColor2)));
+
     return WillPopScope(
       onWillPop: () async {
         context.bloc<PageBloc>().add(GoToSplashPage());
+
         return;
       },
       child: Scaffold(
@@ -51,10 +54,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             onTap: () {
                               context.bloc<PageBloc>().add(GoToSplashPage());
                             },
-                            child: Icon(
-                              Icons.arrow_back,
-                              color: Colors.black,
-                            ),
+                            child: Icon(Icons.arrow_back, color: Colors.black),
                           ),
                         ),
                         Center(
@@ -68,8 +68,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                   Container(
-                    height: 104,
                     width: 90,
+                    height: 104,
                     child: Stack(
                       children: <Widget>[
                         Container(
@@ -124,7 +124,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: nameController,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)),
+                            borderRadius: BorderRadius.circular(6)),
                         labelText: "Full Name",
                         hintText: "Full Name"),
                   ),
@@ -135,7 +135,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: emailController,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)),
+                            borderRadius: BorderRadius.circular(6)),
                         labelText: "Email Address",
                         hintText: "Email Address"),
                   ),
@@ -144,9 +144,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   TextField(
                     controller: passwordController,
+                    obscureText: true,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)),
+                            borderRadius: BorderRadius.circular(6)),
                         labelText: "Password",
                         hintText: "Password"),
                   ),
@@ -155,9 +156,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   TextField(
                     controller: retypePasswordController,
+                    obscureText: true,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)),
+                            borderRadius: BorderRadius.circular(6)),
                         labelText: "Confirm Password",
                         hintText: "Confirm Password"),
                   ),
@@ -165,53 +167,54 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: 30,
                   ),
                   FloatingActionButton(
-                    child: Icon(Icons.arrow_forward),
-                    backgroundColor: mainColor,
-                    elevation: 0,
-                    onPressed: () {
-                      if (!(nameController.text.trim() != "" &&
-                          emailController.text.trim() != "" &&
-                          passwordController.text.trim() != "" &&
-                          retypePasswordController.text.trim() != "")) {
-                        Flushbar(
-                          duration: Duration(milliseconds: 1500),
-                          flushbarPosition: FlushbarPosition.TOP,
-                          backgroundColor: Color(0xFFFF5C83),
-                          message: "Please fill all the field",
-                        )..show(context);
-                      } else if (passwordController.text !=
-                          retypePasswordController.text) {
-                        Flushbar(
-                          duration: Duration(milliseconds: 1500),
-                          flushbarPosition: FlushbarPosition.TOP,
-                          backgroundColor: Color(0xFFFF5C83),
-                          message: "Mismatch password and confimed password",
-                        )..show(context);
-                      } else if (passwordController.text.length < 6) {
-                        Flushbar(
-                          duration: Duration(milliseconds: 1500),
-                          flushbarPosition: FlushbarPosition.TOP,
-                          backgroundColor: Color(0xFFFF5C83),
-                          message: "Password's length min 6 characters",
-                        )..show(context);
-                      } else if (!EmailValidator.validate(
-                          emailController.text)) {
-                        Flushbar(
-                          duration: Duration(milliseconds: 1500),
-                          flushbarPosition: FlushbarPosition.TOP,
-                          backgroundColor: Color(0xFFFF5C83),
-                          message: "Wrong formatted email address",
-                        )..show(context);
-                      } else {
-                        widget.registrationData.name = nameController.text;
-                        widget.registrationData.email = emailController.text;
-                        widget.registrationData.password =
-                            passwordController.text;
+                      child: Icon(Icons.arrow_forward),
+                      backgroundColor: mainColor,
+                      elevation: 0,
+                      onPressed: () {
+                        if (!(nameController.text.trim() != "" &&
+                            emailController.text.trim() != "" &&
+                            passwordController.text.trim() != "" &&
+                            retypePasswordController.text.trim() != "")) {
+                          Flushbar(
+                            duration: Duration(milliseconds: 1500),
+                            flushbarPosition: FlushbarPosition.TOP,
+                            backgroundColor: Color(0xFFFF5C83),
+                            message: "Please fill all the fields",
+                          )..show(context);
+                        } else if (passwordController.text !=
+                            retypePasswordController.text) {
+                          Flushbar(
+                            duration: Duration(milliseconds: 1500),
+                            flushbarPosition: FlushbarPosition.TOP,
+                            backgroundColor: Color(0xFFFF5C83),
+                            message: "Mismatch password and confirmed password",
+                          )..show(context);
+                        } else if (passwordController.text.length < 6) {
+                          Flushbar(
+                            duration: Duration(milliseconds: 1500),
+                            flushbarPosition: FlushbarPosition.TOP,
+                            backgroundColor: Color(0xFFFF5C83),
+                            message: "Password's length min 6 characters",
+                          )..show(context);
+                        } else if (!EmailValidator.validate(
+                            emailController.text)) {
+                          Flushbar(
+                            duration: Duration(milliseconds: 1500),
+                            flushbarPosition: FlushbarPosition.TOP,
+                            backgroundColor: Color(0xFFFF5C83),
+                            message: "Wrong formatted email address",
+                          )..show(context);
+                        } else {
+                          widget.registrationData.name = nameController.text;
+                          widget.registrationData.email = emailController.text;
+                          widget.registrationData.password =
+                              passwordController.text;
 
-                        //TODO: go to preference page
-                      }
-                    },
-                  )
+                          context
+                              .bloc<PageBloc>()
+                              .add(GoToPreferencePage(widget.registrationData));
+                        }
+                      })
                 ],
               )
             ],
