@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_movie_tickets/bloc/movie_bloc.dart';
 import 'package:flutter_movie_tickets/bloc/page_bloc.dart';
 import 'package:flutter_movie_tickets/bloc/theme_bloc.dart';
 import 'package:flutter_movie_tickets/bloc/user_bloc.dart';
@@ -30,7 +31,10 @@ class MyApp extends StatelessWidget {
             providers: [
               BlocProvider(create: (_) => PageBloc()),
               BlocProvider(create: (_) => UserBloc()),
-              BlocProvider(create: (_) => ThemeBloc())
+              BlocProvider(create: (_) => ThemeBloc()),
+              BlocProvider(
+                create: (_) => MovieBloc()..add(FetchMovies()),
+              )
             ],
             child: BlocBuilder<ThemeBloc, ThemeState>(
               builder: (_, themeState) => MaterialApp(
