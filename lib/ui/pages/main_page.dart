@@ -99,7 +99,7 @@ class _MainPageState extends State<MainPage> {
                   BottomNavigationBarItem(
                       title: Text("New Movies",
                           style: GoogleFonts.raleway(
-                              fontSize: 11, fontWeight: FontWeight.w500)),
+                              fontSize: 13, fontWeight: FontWeight.w500)),
                       icon: Container(
                         margin: EdgeInsets.only(bottom: 6),
                         height: 18,
@@ -110,7 +110,7 @@ class _MainPageState extends State<MainPage> {
                   BottomNavigationBarItem(
                       title: Text("My Tickets",
                           style: GoogleFonts.raleway(
-                              fontSize: 11, fontWeight: FontWeight.w500)),
+                              fontSize: 13, fontWeight: FontWeight.w500)),
                       icon: Container(
                         margin: EdgeInsets.only(bottom: 6),
                         height: 20,
