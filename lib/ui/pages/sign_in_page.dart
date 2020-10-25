@@ -146,6 +146,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
                         "Start Fresh Now? ",
@@ -160,6 +161,9 @@ class _SignInPageState extends State<SignInPage> {
                   )
                 ],
               ),
+              SizedBox(
+                height: 20,
+              )
             ],
           ),
         ),

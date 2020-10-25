@@ -25,7 +25,9 @@ class RatingStars extends StatelessWidget {
     widgets.add(Text(
       "$voteAverage/10",
       style: whiteNumberFont.copyWith(
-          fontWeight: FontWeight.w300, fontSize: fontSize),
+          fontWeight: FontWeight.w300,
+          fontSize: fontSize,
+          color: Color(0xFFADADAD)),
     ));
     return Row(
       children: widgets,
