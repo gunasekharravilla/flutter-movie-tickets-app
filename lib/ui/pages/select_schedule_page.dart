@@ -96,6 +96,9 @@ class _SelectSchedulePageState extends State<SelectSchedulePage> {
                 ),
                 //note: CHOOSE TIME
                 generateTimeTable(),
+                SizedBox(
+                  height: 30,
+                ),
                 //note: NEXT BUTTON
                 Align(
                   alignment: Alignment.topCenter,
@@ -130,7 +133,7 @@ class _SelectSchedulePageState extends State<SelectSchedulePage> {
                   ),
                 ),
                 SizedBox(
-                  height: defaultMargin,
+                  height: 40,
                 )
               ],
             )

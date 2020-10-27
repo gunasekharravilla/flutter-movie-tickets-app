@@ -129,6 +129,7 @@ class MovieDetailPage extends StatelessWidget {
                               children: <Widget>[
                                 RatingStars(
                                   voteAverage: movie.voteAverage,
+                                  color: accentColor3,
                                 )
                               ],
                             ),
