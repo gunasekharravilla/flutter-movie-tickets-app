@@ -131,8 +131,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                               ],
                             ),
                             Container(
-                              margin: EdgeInsets.symmetric(
-                                  vertical: 20, horizontal: defaultMargin),
+                              margin: EdgeInsets.symmetric(horizontal: 16),
                               child: Divider(
                                 color: Color(0xFFE4E4E4),
                                 thickness: 1,
@@ -389,7 +388,23 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                   ),
                                   onPressed: () {
                                     if (user.balance >= total) {
-                                      // # Uang cukup
+                                      FlutixTransaction transaction =
+                                          FlutixTransaction(
+                                              userID: user.id,
+                                              title: widget
+                                                  .ticket.movieDetail.title,
+                                              subtitle:
+                                                  widget.ticket.theater.name,
+                                              time: DateTime.now(),
+                                              amount: -total,
+                                              picture: widget.ticket.movieDetail
+                                                  .posterPath);
+
+                                      context.bloc<PageBloc>().add(
+                                          GoToSuccessPage(
+                                              widget.ticket
+                                                  .copyWith(totalPrice: total),
+                                              transaction));
                                     } else {
                                       // # Uang tidak cukup
                                     }

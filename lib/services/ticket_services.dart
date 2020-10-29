@@ -21,12 +21,12 @@ class TicketServices {
   static Future<List<Ticket>> getTickets(String userId) async {
     QuerySnapshot snapshot = await ticketCollection.getDocuments();
     var documents = snapshot.documents
-        .where((document) => document.data['UserID'] == userId);
+        .where((document) => document.data['userID'] == userId);
 
     List<Ticket> tickets = [];
     for (var document in documents) {
-      MovieDetail movieDetail =
-          await MovieServices.getDetails(document.data['MovieID']);
+      MovieDetail movieDetail = await MovieServices.getDetails(null,
+          movieID: document.data['movieID']);
       tickets.add(Ticket(
           movieDetail,
           Theater(document.data['theaterName']),
