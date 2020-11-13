@@ -47,19 +47,21 @@ class Wrapper extends StatelessWidget {
                                                         is OnTicketDetailPage)
                                                     ? TicketDetailPage(
                                                         pageState.ticket)
-                                                    : (pageState
-                                                            is OnProfilePage)
+                                                    : (pageState is OnProfilePage)
                                                         ? ProfilePage()
                                                         : (pageState
                                                                 is OnTopUpPage)
-                                                            ? TopUpPage(
-                                                                pageState
-                                                                    .pageEvent)
+                                                            ? TopUpPage(pageState
+                                                                .pageEvent)
                                                             : (pageState
                                                                     is OnWalletPage)
                                                                 ? WalletPage(
                                                                     pageState
                                                                         .pageEvent)
-                                                                : MainPage());
+                                                                : (pageState
+                                                                        is OnEditProfilePage)
+                                                                    ? EditProfilePage(
+                                                                        pageState.user)
+                                                                    : MainPage());
   }
 }
