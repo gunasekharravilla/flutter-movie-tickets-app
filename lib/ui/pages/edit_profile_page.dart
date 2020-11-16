@@ -50,7 +50,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       child: Stack(
                         children: <Widget>[
                           Align(
-                            alignment: Alignment.topLeft,
+                            alignment: Alignment.centerLeft,
                             child: GestureDetector(
                                 onTap: () {
                                   context

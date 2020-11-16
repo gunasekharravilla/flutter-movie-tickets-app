@@ -27,139 +27,157 @@ class _TopUpPageState extends State<TopUpPage> {
         return;
       },
       child: Scaffold(
-          body: ListView(
-        children: <Widget>[
-          Stack(
-            children: <Widget>[
-              //note: BUTTON BACK
-              SafeArea(
-                child: Container(
-                    margin: EdgeInsets.only(top: 20, left: defaultMargin),
-                    child: GestureDetector(
-                      onTap: () {
-                        context.bloc<PageBloc>().add(widget.pageEvent);
-                      },
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: Colors.black,
-                      ),
-                    )),
-              ),
-              //note: CONTENT
-              Container(
-                width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      "Top Up",
-                      style: blackTextFont.copyWith(fontSize: 20),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    TextField(
-                      onChanged: (text) {
-                        String temp = '';
-
-                        for (int i = 0; i < text.length; i++) {
-                          temp += text.isDigit(i) ? text[i] : '';
-                        }
-
-                        setState(() {
-                          selectedAmount = int.tryParse(temp) ?? 0;
-                        });
-
-                        amountController.text = NumberFormat.currency(
-                                locale: 'id_ID',
-                                symbol: 'IDR ',
-                                decimalDigits: 0)
-                            .format(selectedAmount);
-
-                        amountController.selection = TextSelection.fromPosition(
-                            TextPosition(offset: amountController.text.length));
-                      },
-                      controller: amountController,
-                      decoration: InputDecoration(
-                          labelStyle: greyTextFont,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(6)),
-                          labelText: "Amount"),
-                    ),
-                    Container(
-                      alignment: Alignment.topLeft,
-                      margin: EdgeInsets.only(top: 20, bottom: 20),
-                      child: Text("Choose by Template",
-                          style: blackTextFont.copyWith(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          )),
-                    ),
-                    Wrap(
-                      spacing: 20,
-                      runSpacing: 14,
-                      children: <MoneyCard>[
-                        makeMoneyCard(amount: 50000, width: cardWidth),
-                        makeMoneyCard(amount: 100000, width: cardWidth),
-                        makeMoneyCard(amount: 150000, width: cardWidth),
-                        makeMoneyCard(amount: 200000, width: cardWidth),
-                        makeMoneyCard(amount: 250000, width: cardWidth),
-                        makeMoneyCard(amount: 500000, width: cardWidth),
-                        makeMoneyCard(amount: 1000000, width: cardWidth),
-                        makeMoneyCard(amount: 2500000, width: cardWidth),
-                        makeMoneyCard(amount: 5000000, width: cardWidth),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 100,
-                    ),
-                    SizedBox(
-                      width: 250,
-                      height: 46,
-                      child: BlocBuilder<UserBloc, UserState>(
-                          builder: (_, userState) => RaisedButton(
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: Text(
-                                "Top Up Now",
-                                style: whiteTextFont.copyWith(
-                                    fontSize: 16,
-                                    color: (selectedAmount > 0)
-                                        ? Colors.white
-                                        : Color(0xFFBEBEBE)),
+          backgroundColor: Color(0xFF2C1F63),
+          body: SafeArea(
+            child: Container(
+              color: Colors.white,
+              child: ListView(
+                children: <Widget>[
+                  Stack(
+                    children: <Widget>[
+                      //note: BUTTON BACK
+                      SafeArea(
+                        child: Container(
+                            margin:
+                                EdgeInsets.only(top: 20, left: defaultMargin),
+                            child: GestureDetector(
+                              onTap: () {
+                                context.bloc<PageBloc>().add(widget.pageEvent);
+                              },
+                              child: Icon(
+                                Icons.arrow_back,
+                                color: Colors.black,
                               ),
-                              disabledColor: Color(0xFFE4E4E4),
-                              color: Color(0xFF3E9D9D),
-                              onPressed: (selectedAmount > 0)
-                                  ? () {
-                                      context.bloc<PageBloc>().add(GoToSuccessPage(
-                                          null,
-                                          FlutixTransaction(
-                                              userID: (userState as UserLoaded)
-                                                  .user
-                                                  .id,
-                                              title: "Top Up Wallet",
-                                              amount: selectedAmount,
-                                              subtitle:
-                                                  "${DateTime.now().dayName}, ${DateTime.now().day} ${DateTime.now().monthName} ${DateTime.now().year}",
-                                              time: DateTime.now())));
-                                    }
-                                  : null)),
-                    ),
-                    SizedBox(
-                      height: 100,
-                    )
-                  ],
-                ),
+                            )),
+                      ),
+                      //note: CONTENT
+                      Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              "Top Up",
+                              style: blackTextFont.copyWith(fontSize: 20),
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            TextField(
+                              onChanged: (text) {
+                                String temp = '';
+
+                                for (int i = 0; i < text.length; i++) {
+                                  temp += text.isDigit(i) ? text[i] : '';
+                                }
+
+                                setState(() {
+                                  selectedAmount = int.tryParse(temp) ?? 0;
+                                });
+
+                                amountController.text = NumberFormat.currency(
+                                        locale: 'id_ID',
+                                        symbol: 'IDR ',
+                                        decimalDigits: 0)
+                                    .format(selectedAmount);
+
+                                amountController.selection =
+                                    TextSelection.fromPosition(TextPosition(
+                                        offset: amountController.text.length));
+                              },
+                              controller: amountController,
+                              decoration: InputDecoration(
+                                  labelStyle: greyTextFont,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6)),
+                                  labelText: "Amount"),
+                            ),
+                            Container(
+                              alignment: Alignment.topLeft,
+                              margin: EdgeInsets.only(top: 20, bottom: 20),
+                              child: Text("Choose by Template",
+                                  style: blackTextFont.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  )),
+                            ),
+                            Wrap(
+                              spacing: 20,
+                              runSpacing: 14,
+                              children: <MoneyCard>[
+                                makeMoneyCard(amount: 50000, width: cardWidth),
+                                makeMoneyCard(amount: 100000, width: cardWidth),
+                                makeMoneyCard(amount: 150000, width: cardWidth),
+                                makeMoneyCard(amount: 200000, width: cardWidth),
+                                makeMoneyCard(amount: 250000, width: cardWidth),
+                                makeMoneyCard(amount: 500000, width: cardWidth),
+                                makeMoneyCard(
+                                    amount: 1000000, width: cardWidth),
+                                makeMoneyCard(
+                                    amount: 2500000, width: cardWidth),
+                                makeMoneyCard(
+                                    amount: 5000000, width: cardWidth),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 100,
+                            ),
+                            SizedBox(
+                              width: 250,
+                              height: 46,
+                              child: BlocBuilder<UserBloc, UserState>(
+                                  builder: (_, userState) => RaisedButton(
+                                      elevation: 0,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                      child: Text(
+                                        "Top Up Now",
+                                        style: whiteTextFont.copyWith(
+                                            fontSize: 16,
+                                            color: (selectedAmount > 0)
+                                                ? Colors.white
+                                                : Color(0xFFBEBEBE)),
+                                      ),
+                                      disabledColor: Color(0xFFE4E4E4),
+                                      color: Color(0xFF3E9D9D),
+                                      onPressed: (selectedAmount > 0)
+                                          ? () {
+                                              context.bloc<PageBloc>().add(
+                                                  GoToSuccessPage(
+                                                      null,
+                                                      FlutixTransaction(
+                                                          userID:
+                                                              (userState
+                                                                      as UserLoaded)
+                                                                  .user
+                                                                  .id,
+                                                          title:
+                                                              "Top Up Wallet",
+                                                          amount:
+                                                              selectedAmount,
+                                                          subtitle:
+                                                              "${DateTime.now().dayName}, ${DateTime.now().day} ${DateTime.now().monthName} ${DateTime.now().year}",
+                                                          time:
+                                                              DateTime.now())));
+                                            }
+                                          : null)),
+                            ),
+                            SizedBox(
+                              height: 100,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ],
-          ),
-        ],
-      )),
+            ),
+          )),
     );
   }
 

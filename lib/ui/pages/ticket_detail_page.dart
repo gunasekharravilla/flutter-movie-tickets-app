@@ -9,7 +9,9 @@ class TicketDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-        context.bloc<PageBloc>().add(GoToMainPage());
+        context.bloc<PageBloc>().add(GoToMainPage(
+            bottomNavbarIndex: 1,
+            isExpired: ticket.time.isBefore(DateTime.now())));
 
         return;
       },
@@ -32,7 +34,10 @@ class TicketDetailPage extends StatelessWidget {
                             alignment: Alignment.topLeft,
                             child: GestureDetector(
                               onTap: () {
-                                context.bloc<PageBloc>().add(GoToMainPage());
+                                context.bloc<PageBloc>().add(GoToMainPage(
+                                    bottomNavbarIndex: 1,
+                                    isExpired:
+                                        ticket.time.isBefore(DateTime.now())));
                               },
                               child: Icon(
                                 Icons.arrow_back,

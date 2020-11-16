@@ -47,12 +47,14 @@ class Wrapper extends StatelessWidget {
                                                         is OnTicketDetailPage)
                                                     ? TicketDetailPage(
                                                         pageState.ticket)
-                                                    : (pageState is OnProfilePage)
+                                                    : (pageState
+                                                            is OnProfilePage)
                                                         ? ProfilePage()
                                                         : (pageState
                                                                 is OnTopUpPage)
-                                                            ? TopUpPage(pageState
-                                                                .pageEvent)
+                                                            ? TopUpPage(
+                                                                pageState
+                                                                    .pageEvent)
                                                             : (pageState
                                                                     is OnWalletPage)
                                                                 ? WalletPage(
@@ -61,7 +63,17 @@ class Wrapper extends StatelessWidget {
                                                                 : (pageState
                                                                         is OnEditProfilePage)
                                                                     ? EditProfilePage(
-                                                                        pageState.user)
-                                                                    : MainPage());
+                                                                        pageState
+                                                                            .user)
+                                                                    : (pageState
+                                                                            is OnChangePasswordPage)
+                                                                        ? ChangePasswordPage(
+                                                                            pageState.user)
+                                                                        : MainPage(
+                                                                            bottomNavBarIndex:
+                                                                                (pageState as OnMainPage).bottomNavbarIndex,
+                                                                            isExpired:
+                                                                                (pageState as OnMainPage).isExpired,
+                                                                          ));
   }
 }

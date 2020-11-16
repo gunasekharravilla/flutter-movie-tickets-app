@@ -21,113 +21,118 @@ class _TicketPageState extends State<TicketPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () {
+        return;
+      },
+      child: Scaffold(
         body: Stack(
-      children: <Widget>[
-        //note: CONTENT
-        BlocBuilder<TicketBloc, TicketState>(
-            builder: (_, ticketState) => Container(
-                  margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-                  child: TicketViewer(isExpiredTickets
-                      ? ticketState.tickets
-                          .where(
-                              (ticket) => ticket.time.isBefore(DateTime.now()))
-                          .toList()
-                      : ticketState.tickets
-                          .where(
-                              (ticket) => !ticket.time.isBefore(DateTime.now()))
-                          .toList()),
-                )),
-        //note: HEADER
-        Container(
-          height: 113,
-          color: accentColor1,
-        ),
-        SafeArea(
-            child: ClipPath(
-          clipper: HeaderClipper(),
-          child: Container(
-            height: 113,
-            color: accentColor1,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(left: defaultMargin, bottom: 32),
-                  child: Text(
-                    "My Tickets",
-                    style: whiteTextFont.copyWith(fontSize: 20),
-                  ),
-                ),
-                Row(
+          children: <Widget>[
+            // note: CONTENT
+            BlocBuilder<TicketBloc, TicketState>(
+                builder: (_, ticketState) => Container(
+                      margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                      child: TicketViewer(isExpiredTickets
+                          ? ticketState.tickets
+                              .where((ticket) =>
+                                  ticket.time.isBefore(DateTime.now()))
+                              .toList()
+                          : ticketState.tickets
+                              .where((ticket) =>
+                                  !ticket.time.isBefore(DateTime.now()))
+                              .toList()),
+                    )),
+            // note: HEADER
+            Container(
+              height: 113,
+              color: accentColor1,
+            ),
+            SafeArea(
+                child: ClipPath(
+              clipper: HeaderClipper(),
+              child: Container(
+                height: 113,
+                color: accentColor1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    Column(
+                    Container(
+                        margin: EdgeInsets.only(left: 24, bottom: 32),
+                        child: Text(
+                          "My Tickets",
+                          style: whiteTextFont.copyWith(fontSize: 20),
+                        )),
+                    Row(
                       children: <Widget>[
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isExpiredTickets = !isExpiredTickets;
-                            });
-                          },
-                          child: Text(
-                            "Newest",
-                            style: whiteTextFont.copyWith(
-                                fontSize: 16,
-                                color: !isExpiredTickets
-                                    ? Colors.white
-                                    : Color(0xFF6F678E)),
-                          ),
+                        Column(
+                          children: <Widget>[
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  isExpiredTickets = !isExpiredTickets;
+                                });
+                              },
+                              child: Text(
+                                "Newest",
+                                style: whiteTextFont.copyWith(
+                                    fontSize: 16,
+                                    color: !isExpiredTickets
+                                        ? Colors.white
+                                        : Color(0xFF6F678E)),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Container(
+                              height: 4,
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              color: !isExpiredTickets
+                                  ? accentColor2
+                                  : Colors.transparent,
+                            )
+                          ],
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Container(
-                          height: 4,
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          color: !isExpiredTickets
-                              ? accentColor2
-                              : Colors.transparent,
-                        ),
+                        Column(
+                          children: <Widget>[
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  isExpiredTickets = !isExpiredTickets;
+                                });
+                              },
+                              child: Text(
+                                "Oldest",
+                                style: whiteTextFont.copyWith(
+                                    fontSize: 16,
+                                    color: isExpiredTickets
+                                        ? Colors.white
+                                        : Color(0xFF6F678E)),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Container(
+                              height: 4,
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              color: isExpiredTickets
+                                  ? accentColor2
+                                  : Colors.transparent,
+                            )
+                          ],
+                        )
                       ],
-                    ),
-                    Column(
-                      children: <Widget>[
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isExpiredTickets = !isExpiredTickets;
-                            });
-                          },
-                          child: Text(
-                            "Oldest",
-                            style: whiteTextFont.copyWith(
-                                fontSize: 16,
-                                color: isExpiredTickets
-                                    ? Colors.white
-                                    : Color(0xFF6F678E)),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Container(
-                          height: 4,
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          color: isExpiredTickets
-                              ? accentColor2
-                              : Colors.transparent,
-                        ),
-                      ],
-                    ),
+                    )
                   ],
                 ),
-              ],
-            ),
-          ),
-        ))
-      ],
-    ));
+              ),
+            ))
+          ],
+        ),
+      ),
+    );
   }
 }
 

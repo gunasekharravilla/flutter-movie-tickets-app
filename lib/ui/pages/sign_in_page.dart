@@ -91,9 +91,39 @@ class _SignInPageState extends State<SignInPage> {
                         style: greyTextFont.copyWith(
                             fontSize: 12, fontWeight: FontWeight.w400),
                       ),
-                      Text(
-                        "Get Now",
-                        style: purpleTextFont.copyWith(fontSize: 12),
+                      GestureDetector(
+                        onTap: () {
+                          if (emailController.text.trim() == "") {
+                            Flushbar(
+                              duration: Duration(milliseconds: 1500),
+                              flushbarPosition: FlushbarPosition.TOP,
+                              backgroundColor: Color(0xFFFF5C83),
+                              message: "Please fill the correct email",
+                            )..show(context);
+                          } else if (!EmailValidator.validate(
+                              emailController.text)) {
+                            Flushbar(
+                              duration: Duration(milliseconds: 1500),
+                              flushbarPosition: FlushbarPosition.TOP,
+                              backgroundColor: Color(0xFFFF5C83),
+                              message: "Wrong formatted email address",
+                            )..show(context);
+                          } else {
+                            AuthServices.resetPassword(emailController.text);
+
+                            Flushbar(
+                              duration: Duration(milliseconds: 2000),
+                              flushbarPosition: FlushbarPosition.TOP,
+                              backgroundColor: Color(0xFFFF5C83),
+                              message:
+                                  "The link to reset your password has been sent to your email.",
+                            )..show(context);
+                          }
+                        },
+                        child: Text(
+                          "Get Now",
+                          style: purpleTextFont.copyWith(fontSize: 12),
+                        ),
                       )
                     ],
                   ),
@@ -138,7 +168,8 @@ class _SignInPageState extends State<SignInPage> {
                                           flushbarPosition:
                                               FlushbarPosition.TOP,
                                           backgroundColor: Color(0xFFFF5C83),
-                                          message: result.message,
+                                          message:
+                                              "The email and password miss matched",
                                         )..show(context);
                                       }
                                     }
@@ -153,9 +184,16 @@ class _SignInPageState extends State<SignInPage> {
                         style:
                             greyTextFont.copyWith(fontWeight: FontWeight.w400),
                       ),
-                      Text(
-                        "Sign Up",
-                        style: purpleTextFont,
+                      GestureDetector(
+                        onTap: () {
+                          context
+                              .bloc<PageBloc>()
+                              .add(GoToRegistrationPage(RegistrationData()));
+                        },
+                        child: Text(
+                          "Sign Up",
+                          style: purpleTextFont,
+                        ),
                       )
                     ],
                   )

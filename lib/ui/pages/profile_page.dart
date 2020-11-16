@@ -175,20 +175,35 @@ class _ProfilePageState extends State<ProfilePage> {
                                   child: generateDashedDivider(
                                       MediaQuery.of(context).size.width -
                                           2 * defaultMargin)),
-                              Row(
+                              Column(
                                 children: <Widget>[
-                                  Container(
-                                    width: 24,
-                                    height: 24,
-                                    child:
-                                        Image.asset("assets/help_center.png"),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text("Change Password",
-                                      style:
-                                          blackTextFont.copyWith(fontSize: 16)),
+                                  BlocBuilder<UserBloc, UserState>(
+                                      builder: (_, userState) =>
+                                          GestureDetector(
+                                            onTap: () {
+                                              context.bloc<PageBloc>().add(
+                                                  GoToChangePasswordPage(
+                                                      (userState as UserLoaded)
+                                                          .user));
+                                            },
+                                            child: Row(
+                                              children: <Widget>[
+                                                Container(
+                                                  width: 24,
+                                                  height: 24,
+                                                  child: Image.asset(
+                                                      "assets/help_center.png"),
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text("Change Password",
+                                                    style:
+                                                        blackTextFont.copyWith(
+                                                            fontSize: 16)),
+                                              ],
+                                            ),
+                                          )),
                                 ],
                               ),
                               Container(
@@ -261,7 +276,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     SafeArea(
                       child: Container(
-                        margin: EdgeInsets.only(top: 20, left: defaultMargin),
+                        margin: EdgeInsets.only(top: 34, left: defaultMargin),
                         child: GestureDetector(
                           onTap: () {
                             context.bloc<PageBloc>().add(GoToMainPage());

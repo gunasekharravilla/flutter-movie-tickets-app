@@ -406,7 +406,23 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                                   .copyWith(totalPrice: total),
                                               transaction));
                                     } else {
-                                      // # Uang tidak cukup
+                                      FlutixTransaction transaction =
+                                          FlutixTransaction(
+                                              userID: user.id,
+                                              title: widget
+                                                  .ticket.movieDetail.title,
+                                              subtitle:
+                                                  widget.ticket.theater.name,
+                                              time: DateTime.now(),
+                                              amount: -total,
+                                              picture: widget.ticket.movieDetail
+                                                  .posterPath);
+
+                                      context.bloc<PageBloc>().add(
+                                          GoToTopUpPage(GoToSuccessPage(
+                                              widget.ticket
+                                                  .copyWith(totalPrice: total),
+                                              transaction)));
                                     }
                                   }),
                             )

@@ -75,14 +75,21 @@ class MoviePage extends StatelessWidget {
                           overflow: TextOverflow.clip,
                         ),
                       ),
-                      Text(
-                        NumberFormat.currency(
-                                locale: "id_ID",
-                                decimalDigits: 0,
-                                symbol: "IDR ")
-                            .format(userState.user.balance),
-                        style: yellowNumberFont.copyWith(
-                            fontSize: 14, fontWeight: FontWeight.w400),
+                      GestureDetector(
+                        onTap: () {
+                          context
+                              .bloc<PageBloc>()
+                              .add(GoToWalletPage(GoToMainPage()));
+                        },
+                        child: Text(
+                          NumberFormat.currency(
+                                  locale: "id_ID",
+                                  decimalDigits: 0,
+                                  symbol: "IDR ")
+                              .format(userState.user.balance),
+                          style: yellowNumberFont.copyWith(
+                              fontSize: 14, fontWeight: FontWeight.w400),
+                        ),
                       )
                     ],
                   )
@@ -108,38 +115,40 @@ class MoviePage extends StatelessWidget {
         ),
         SizedBox(
           height: 140,
-          child: BlocBuilder<MovieBloc, MovieState>(builder: (_, movieState) {
-            if (movieState is MovieLoaded) {
-              List<Movie> movies = movieState.movies.sublist(0, 10);
+          child: BlocBuilder<MovieBloc, MovieState>(
+            builder: (_, movieState) {
+              if (movieState is MovieLoaded) {
+                List<Movie> movies = movieState.movies.sublist(0, 10);
 
-              return ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: movies.length,
-                  itemBuilder: (_, index) => Container(
-                        margin: EdgeInsets.only(
-                            left: (index == 0) ? defaultMargin : 0,
-                            right: (index == movies.length - 1)
-                                ? defaultMargin
-                                : 16),
-                        child: MovieCard(
-                          movies[index],
-                          onTap: () {
-                            context
-                                .bloc<PageBloc>()
-                                .add(GoToMovieDetailPage(movies[index]));
-                          },
-                        ),
-                      ));
-            } else {
-              return SpinKitFadingCircle(
-                color: mainColor,
-                size: 50,
-              );
-            }
-          }),
+                return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: movies.length,
+                    itemBuilder: (_, index) => Container(
+                          margin: EdgeInsets.only(
+                              left: (index == 0) ? defaultMargin : 0,
+                              right: (index == movies.length - 1)
+                                  ? defaultMargin
+                                  : 16),
+                          child: MovieCard(
+                            movies[index],
+                            onTap: () {
+                              context
+                                  .bloc<PageBloc>()
+                                  .add(GoToMovieDetailPage(movies[index]));
+                            },
+                          ),
+                        ));
+              } else {
+                return SpinKitFadingCircle(
+                  color: mainColor,
+                  size: 50,
+                );
+              }
+            },
+          ),
         ),
 
-        //note: BROWSE MOVIE
+        // note: BROWSE MOVIE
         Container(
           margin: EdgeInsets.fromLTRB(defaultMargin, 30, defaultMargin, 12),
           child: Text(
@@ -148,25 +157,27 @@ class MoviePage extends StatelessWidget {
                 fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
-        BlocBuilder<UserBloc, UserState>(builder: (_, userState) {
-          if (userState is UserLoaded) {
-            return Container(
-              margin: EdgeInsets.symmetric(horizontal: 34),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: List.generate(
-                    userState.user.selectedGenres.length,
-                    (index) =>
-                        BrowseButton(userState.user.selectedGenres[index])),
-              ),
-            );
-          } else {
-            return SpinKitFadingCircle(
-              color: mainColor,
-              size: 50,
-            );
-          }
-        }),
+        BlocBuilder<UserBloc, UserState>(
+          builder: (_, userState) {
+            if (userState is UserLoaded) {
+              return Container(
+                margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(
+                      userState.user.selectedGenres.length,
+                      (index) =>
+                          BrowseButton(userState.user.selectedGenres[index])),
+                ),
+              );
+            } else {
+              return SpinKitFadingCircle(
+                color: mainColor,
+                size: 50,
+              );
+            }
+          },
+        ),
 
         // note: COMING SOON
         Container(
@@ -179,28 +190,30 @@ class MoviePage extends StatelessWidget {
         ),
         SizedBox(
           height: 160,
-          child: BlocBuilder<MovieBloc, MovieState>(builder: (_, movieState) {
-            if (movieState is MovieLoaded) {
-              List<Movie> movies = movieState.movies.sublist(10);
+          child: BlocBuilder<MovieBloc, MovieState>(
+            builder: (_, movieState) {
+              if (movieState is MovieLoaded) {
+                List<Movie> movies = movieState.movies.sublist(10);
 
-              return ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: movies.length,
-                  itemBuilder: (_, index) => Container(
-                        margin: EdgeInsets.only(
-                            left: (index == 0) ? defaultMargin : 0,
-                            right: (index == movies.length - 1)
-                                ? defaultMargin
-                                : 16),
-                        child: ComingSoonCard(movies[index]),
-                      ));
-            } else {
-              return SpinKitFadingCircle(
-                color: mainColor,
-                size: 50,
-              );
-            }
-          }),
+                return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: movies.length,
+                    itemBuilder: (_, index) => Container(
+                          margin: EdgeInsets.only(
+                              left: (index == 0) ? defaultMargin : 0,
+                              right: (index == movies.length - 1)
+                                  ? defaultMargin
+                                  : 16),
+                          child: ComingSoonCard(movies[index]),
+                        ));
+              } else {
+                return SpinKitFadingCircle(
+                  color: mainColor,
+                  size: 50,
+                );
+              }
+            },
+          ),
         ),
 
         // note: GET LUCKY DAY
@@ -215,10 +228,9 @@ class MoviePage extends StatelessWidget {
         Column(
           children: dummyPromos
               .map((e) => Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        defaultMargin, 0, defaultMargin, 16),
-                    child: PromoCard(e),
-                  ))
+                  padding:
+                      EdgeInsets.fromLTRB(defaultMargin, 0, defaultMargin, 16),
+                  child: PromoCard(e)))
               .toList(),
         ),
         SizedBox(
