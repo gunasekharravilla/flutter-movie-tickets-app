@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_tickets/bloc/blocs.dart';
@@ -40,4 +40,3 @@ part 'topup_page.dart';
 part 'wallet_page.dart';
 part 'edit_profile_page.dart';
 part 'change_password_page.dart';
-

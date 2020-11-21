@@ -161,7 +161,7 @@ class MoviePage extends StatelessWidget {
           builder: (_, userState) {
             if (userState is UserLoaded) {
               return Container(
-                margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                margin: EdgeInsets.symmetric(horizontal: 35),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: List.generate(

@@ -1,16 +1,18 @@
 part of 'shared.dart';
 
 Future<File> getImage() async {
-  var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+  PickedFile pickedFile =
+      await ImagePicker().getImage(source: ImageSource.gallery);
+  var image = File(pickedFile.path);
   return image;
 }
 
 Future<String> uploadImage(File image) async {
   String fileName = basename(image.path);
 
-  StorageReference ref = FirebaseStorage.instance.ref().child(fileName);
-  StorageUploadTask task = ref.putFile(image);
-  StorageTaskSnapshot snapshot = await task.onComplete;
+  Reference ref = FirebaseStorage.instance.ref().child(fileName);
+  UploadTask task = ref.putFile(image);
+  TaskSnapshot snapshot = await task;
 
   return await snapshot.ref.getDownloadURL();
 }
