@@ -16,7 +16,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
     return WillPopScope(
         onWillPop: () async {
-          context.bloc<PageBloc>().add(GoToSelectSeatPage(widget.ticket));
+          context.read<PageBloc>().add(GoToSelectSeatPage(widget.ticket));
 
           return;
         },
@@ -44,7 +44,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                             child: GestureDetector(
                               onTap: () {
                                 context
-                                    .bloc<PageBloc>()
+                                    .read<PageBloc>()
                                     .add(GoToSelectSeatPage(widget.ticket));
                               },
                               child: Icon(
@@ -400,7 +400,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                               picture: widget.ticket.movieDetail
                                                   .posterPath);
 
-                                      context.bloc<PageBloc>().add(
+                                      context.read<PageBloc>().add(
                                           GoToSuccessPage(
                                               widget.ticket
                                                   .copyWith(totalPrice: total),
@@ -418,7 +418,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                               picture: widget.ticket.movieDetail
                                                   .posterPath);
 
-                                      context.bloc<PageBloc>().add(
+                                      context.read<PageBloc>().add(
                                           GoToTopUpPage(GoToSuccessPage(
                                               widget.ticket
                                                   .copyWith(totalPrice: total),

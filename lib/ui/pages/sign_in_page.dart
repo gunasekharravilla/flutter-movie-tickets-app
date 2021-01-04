@@ -15,13 +15,12 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    context
-        .bloc<ThemeBloc>()
+    BlocProvider.of<ThemeBloc>(context)
         .add(ChangeTheme(ThemeData().copyWith(primaryColor: accentColor2)));
 
     return WillPopScope(
       onWillPop: () {
-        context.bloc<PageBloc>().add(GoToSplashPage());
+        context.read<PageBloc>().add(GoToSplashPage());
 
         return;
       },
@@ -168,8 +167,7 @@ class _SignInPageState extends State<SignInPage> {
                                           flushbarPosition:
                                               FlushbarPosition.TOP,
                                           backgroundColor: Color(0xFFFF5C83),
-                                          message:
-                                              "The email and password miss matched",
+                                          message: result.message,
                                         )..show(context);
                                       }
                                     }
@@ -187,7 +185,7 @@ class _SignInPageState extends State<SignInPage> {
                       GestureDetector(
                         onTap: () {
                           context
-                              .bloc<PageBloc>()
+                              .read<PageBloc>()
                               .add(GoToRegistrationPage(RegistrationData()));
                         },
                         child: Text(

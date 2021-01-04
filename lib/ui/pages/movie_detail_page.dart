@@ -11,7 +11,7 @@ class MovieDetailPage extends StatelessWidget {
     List<Credit> credits;
     return WillPopScope(
       onWillPop: () async {
-        context.bloc<PageBloc>().add(GoToMainPage());
+        context.read<PageBloc>().add(GoToMainPage());
 
         return;
       },
@@ -74,7 +74,7 @@ class MovieDetailPage extends StatelessWidget {
                                 child: GestureDetector(
                                   onTap: () {
                                     context
-                                        .bloc<PageBloc>()
+                                        .read<PageBloc>()
                                         .add(GoToMainPage());
                                   },
                                   child: Icon(
@@ -212,7 +212,7 @@ class MovieDetailPage extends StatelessWidget {
                                 ),
                                 onPressed: () {
                                   context
-                                      .bloc<PageBloc>()
+                                      .read<PageBloc>()
                                       .add(GoToSelectSchedulePage(movieDetail));
                                 }),
                           ),

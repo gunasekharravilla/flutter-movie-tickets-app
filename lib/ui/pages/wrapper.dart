@@ -8,15 +8,15 @@ class Wrapper extends StatelessWidget {
     if (firebaseUser == null) {
       if (!(prevPageEvent is GoToSplashPage)) {
         prevPageEvent = GoToSplashPage();
-        context.bloc<PageBloc>().add(prevPageEvent);
+        context.watch<PageBloc>().add(prevPageEvent);
       }
     } else {
       if (!(prevPageEvent is GoToMainPage)) {
-        context.bloc<UserBloc>().add(LoadUser(firebaseUser.uid));
-        context.bloc<TicketBloc>().add(GetTickets(firebaseUser.uid));
+        BlocProvider.of<UserBloc>(context).add(LoadUser(firebaseUser.uid));
+        BlocProvider.of<TicketBloc>(context).add(GetTickets(firebaseUser.uid));
 
         prevPageEvent = GoToMainPage();
-        context.bloc<PageBloc>().add(prevPageEvent);
+        context.watch<PageBloc>().add(prevPageEvent);
       }
     }
 
@@ -67,13 +67,16 @@ class Wrapper extends StatelessWidget {
                                                                             .user)
                                                                     : (pageState
                                                                             is OnChangePasswordPage)
-                                                                        ? ChangePasswordPage(
-                                                                            pageState.user)
-                                                                        : MainPage(
-                                                                            bottomNavBarIndex:
-                                                                                (pageState as OnMainPage).bottomNavbarIndex,
-                                                                            isExpired:
-                                                                                (pageState as OnMainPage).isExpired,
-                                                                          ));
+                                                                        ? ChangePasswordPage(pageState
+                                                                            .user)
+                                                                        : (pageState
+                                                                                is OnMainPage)
+                                                                            ? MainPage(
+                                                                                // ignore: unnecessary_cast
+                                                                                bottomNavBarIndex: (pageState as OnMainPage).bottomNavbarIndex,
+                                                                                // ignore: unnecessary_cast
+                                                                                isExpired: (pageState as OnMainPage).isExpired,
+                                                                              )
+                                                                            : Container());
   }
 }

@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "794500613567",
-    "firebase_url": "https://flutter-movie-tickets.firebaseio.com",
-    "project_id": "flutter-movie-tickets",
-    "storage_bucket": "flutter-movie-tickets.appspot.com"
+    "project_number": "479157857453",
+    "firebase_url": "https://flutix-9906d.firebaseio.com",
+    "project_id": "flutix-9906d",
+    "storage_bucket": "flutix-9906d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:794500613567:android:0f5b60a0b89d95074d4d0a",
+        "mobilesdk_app_id": "1:479157857453:android:8686ba3f03b5dab25e6a24",
         "android_client_info": {
           "package_name": "com.damarion.flutter_movie_tickets"
         }
       },
       "oauth_client": [
         {
-          "client_id": "794500613567-fm3c460m9pemna3v9jssiv5678f8vtug.apps.googleusercontent.com",
+          "client_id": "479157857453-jr1hboovt0d25otagr71iufsfrmjv6v9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDHV7Vm-m-v4DrrsHFdDqImerIk2mFZqwU"
+          "current_key": "AIzaSyBA0oOIArj3RHLM7gONu_2yOWav5CMMaXQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "794500613567-fm3c460m9pemna3v9jssiv5678f8vtug.apps.googleusercontent.com",
+              "client_id": "479157857453-jr1hboovt0d25otagr71iufsfrmjv6v9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

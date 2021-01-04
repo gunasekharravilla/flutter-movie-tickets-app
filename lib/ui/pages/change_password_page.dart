@@ -14,7 +14,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () async {
-          context.bloc<PageBloc>().add(GoToProfilePage());
+          context.read<PageBloc>().add(GoToProfilePage());
 
           return;
         },
@@ -38,7 +38,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                                 child: GestureDetector(
                                     onTap: () {
                                       context
-                                          .bloc<PageBloc>()
+                                          .read<PageBloc>()
                                           .add(GoToProfilePage());
                                     },
                                     child: Icon(

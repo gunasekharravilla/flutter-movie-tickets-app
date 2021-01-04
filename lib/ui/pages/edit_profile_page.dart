@@ -24,13 +24,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    context
-        .bloc<ThemeBloc>()
+    BlocProvider.of<ThemeBloc>(context)
         .add(ChangeTheme(ThemeData().copyWith(primaryColor: accentColor2)));
 
     return WillPopScope(
       onWillPop: () async {
-        context.bloc<PageBloc>().add(GoToProfilePage());
+        context.read<PageBloc>().add(GoToProfilePage());
 
         return;
       },
@@ -54,7 +53,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             child: GestureDetector(
                                 onTap: () {
                                   context
-                                      .bloc<PageBloc>()
+                                      .read<PageBloc>()
                                       .add(GoToProfilePage());
                                 },
                                 child: Icon(Icons.arrow_back,
@@ -185,12 +184,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                               profileImageFile);
                                         }
 
-                                        context.bloc<UserBloc>().add(UpdateData(
-                                            name: nameController.text,
-                                            profileImage: profilePath));
+                                        BlocProvider.of<UserBloc>(context).add(
+                                            UpdateData(
+                                                name: nameController.text,
+                                                profileImage: profilePath));
 
                                         context
-                                            .bloc<PageBloc>()
+                                            .read<PageBloc>()
                                             .add(GoToProfilePage());
                                       }
                                     : null),

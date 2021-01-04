@@ -10,7 +10,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () async {
-          context.bloc<PageBloc>().add(GoToMainPage());
+          context.read<PageBloc>().add(GoToMainPage());
 
           return;
         },
@@ -100,7 +100,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               BlocBuilder<UserBloc, UserState>(
                                 builder: (_, userState) => GestureDetector(
                                   onTap: () {
-                                    context.bloc<PageBloc>().add(
+                                    context.read<PageBloc>().add(
                                         GoToEditProfilePage(
                                             (userState as UserLoaded).user));
                                   },
@@ -130,7 +130,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               GestureDetector(
                                 onTap: () {
                                   context
-                                      .bloc<PageBloc>()
+                                      .read<PageBloc>()
                                       .add(GoToWalletPage(GoToProfilePage()));
                                 },
                                 child: Row(
@@ -181,7 +181,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       builder: (_, userState) =>
                                           GestureDetector(
                                             onTap: () {
-                                              context.bloc<PageBloc>().add(
+                                              context.read<PageBloc>().add(
                                                   GoToChangePasswordPage(
                                                       (userState as UserLoaded)
                                                           .user));
@@ -234,7 +234,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               GestureDetector(
                                 onTap: () async {
                                   await AuthServices.signOut();
-                                  context.bloc<UserBloc>().add(SignOut());
+                                  BlocProvider.of<UserBloc>(context).add(SignOut());
                                 },
                                 child: Row(
                                   children: <Widget>[
@@ -279,7 +279,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         margin: EdgeInsets.only(top: 34, left: defaultMargin),
                         child: GestureDetector(
                           onTap: () {
-                            context.bloc<PageBloc>().add(GoToMainPage());
+                            context.read<PageBloc>().add(GoToMainPage());
                           },
                           child: Icon(
                             Icons.arrow_back,

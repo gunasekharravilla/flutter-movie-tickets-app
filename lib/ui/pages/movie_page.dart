@@ -18,8 +18,7 @@ class MoviePage extends StatelessWidget {
               if (imageFileToUpload != null) {
                 uploadImage(imageFileToUpload).then((downloadURL) {
                   imageFileToUpload = null;
-                  context
-                      .bloc<UserBloc>()
+                  BlocProvider.of<UserBloc>(context)
                       .add(UpdateData(profileImage: downloadURL));
                 });
               }
@@ -28,7 +27,7 @@ class MoviePage extends StatelessWidget {
                 children: <Widget>[
                   GestureDetector(
                     onTap: () {
-                      context.bloc<PageBloc>().add(GoToProfilePage());
+                      context.read<PageBloc>().add(GoToProfilePage());
                     },
                     child: Container(
                       padding: EdgeInsets.all(5),
@@ -78,7 +77,7 @@ class MoviePage extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           context
-                              .bloc<PageBloc>()
+                              .read<PageBloc>()
                               .add(GoToWalletPage(GoToMainPage()));
                         },
                         child: Text(
@@ -133,7 +132,7 @@ class MoviePage extends StatelessWidget {
                             movies[index],
                             onTap: () {
                               context
-                                  .bloc<PageBloc>()
+                                  .read<PageBloc>()
                                   .add(GoToMovieDetailPage(movies[index]));
                             },
                           ),
@@ -161,7 +160,7 @@ class MoviePage extends StatelessWidget {
           builder: (_, userState) {
             if (userState is UserLoaded) {
               return Container(
-                margin: EdgeInsets.symmetric(horizontal: 35),
+                margin: EdgeInsets.symmetric(horizontal: 24),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: List.generate(

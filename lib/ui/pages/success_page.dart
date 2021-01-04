@@ -71,10 +71,10 @@ class SuccessPage extends StatelessWidget {
                                   onPressed: () {
                                     if (ticket == null) {
                                       context
-                                          .bloc<PageBloc>()
+                                          .read<PageBloc>()
                                           .add(GoToWalletPage(GoToMainPage()));
                                     } else {
-                                      context.bloc<PageBloc>().add(
+                                      context.read<PageBloc>().add(
                                           GoToMainPage(bottomNavbarIndex: 1));
                                     }
                                   }),
@@ -90,7 +90,7 @@ class SuccessPage extends StatelessWidget {
                                 GestureDetector(
                                   onTap: () {
                                     context
-                                        .bloc<PageBloc>()
+                                        .read<PageBloc>()
                                         .add(GoToMainPage());
                                   },
                                   child: Text(
@@ -114,14 +114,15 @@ class SuccessPage extends StatelessWidget {
   }
 
   Future<void> processingTicketOrder(BuildContext context) async {
-    context.bloc<UserBloc>().add(Purchase(ticket.totalPrice));
-    context.bloc<TicketBloc>().add(BuyTicket(ticket, transaction.userID));
+    BlocProvider.of<UserBloc>(context).add(Purchase(ticket.totalPrice));
+    BlocProvider.of<TicketBloc>(context)
+        .add(BuyTicket(ticket, transaction.userID));
 
     await FlutixTransactionServices.saveTransaction(transaction);
   }
 
   Future<void> processingTopUp(BuildContext context) async {
-    context.bloc<UserBloc>().add(TopUp(transaction.amount));
+    BlocProvider.of<UserBloc>(context).add(TopUp(transaction.amount));
 
     await FlutixTransactionServices.saveTransaction(transaction);
   }
